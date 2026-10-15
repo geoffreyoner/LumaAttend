@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Settings — LumaAttend{% endblock %}
+{% block content %}
+<div class="page-header"><h1>Settings</h1></div>
+<div class="glass panel settings-panel">
+  <form id="settingsForm">
+    <div class="field"><label>Check-in Time</label>
+      <input type="time" name="check_in_time" class="input"></div>
+    <div class="field"><label>Late Threshold</label>
+      <input type="time" name="late_threshold" class="input"></div>
+    <div class="field"><label>Face Match Threshold (0.1 – 0.8)</label>
+      <input type="number" name="face_match_threshold" step="0.01" min="0.1" max="0.8" class="input"></div>
+    <div class="field"><label>Processing FPS (2 – 10)</label>
+      <input type="number" name="processing_fps" min="2" max="10" class="input"></div>
+    <div class="field"><label>Data Retention (days)</label>
+      <input type="number" name="retention_days" min="7" max="3650" class="input"></div>
+    <div class="field"><label>Kiosk minimum interval before check-out (minutes)</label>
+      <input type="number" name="kiosk_min_checkout_minutes" min="1" max="1440" class="input"></div>
+    <button type="submit" class="btn btn-primary">Save Settings</button>
+  </form>
+  <div class="privacy-note">
+    <h4>Privacy</h4>
+    <p class="text-muted">Face embeddings are stored locally in SQLite. No raw face images are retained. Templates can be deleted per user from the Users page.</p>
+  </div>
+</div>
+<script>window.CSRF_TOKEN = "{{ csrf_token }}";</script>
+<script>
+document.getElementById('settingsForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const obj = {};
+  fd.forEach((v, k) => obj[k] = v);
+  const res = await fetch('/api/settings', {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json', 'X-CSRF-Token': window.CSRF_TOKEN},
+    body: JSON.stringify(obj),
+  });
+  showToast(res.ok ? 'Settings saved' : 'Failed to save', res.ok ? 'success' : 'error');
+});
+fetch('/api/settings').then(r => r.json()).then(d => {
+  for (const [k, v] of Object.entries(d.settings)) {
+    const el = document.querySelector(`[name="${k}"]`);
+    if (el) el.value = v;
+  }
+});
+</script>
+{% endblock %}

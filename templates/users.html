@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Users — LumaAttend{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>User Management</h1>
+  <button class="btn btn-primary" id="addUserBtn">+ Add User</button>
+</div>
+<div class="glass panel">
+  <div class="toolbar">
+    <input type="search" id="userSearch" placeholder="Search name, username, code..." class="input">
+  </div>
+  <div id="usersList" class="user-grid"><p class="text-muted">Loading...</p></div>
+</div>
+
+<!-- Add/Edit User Modal -->
+<div class="modal-backdrop hidden" id="userModal">
+  <div class="modal glass">
+    <h3 id="modalTitle">Add User</h3>
+    <form id="userForm">
+      <input type="hidden" id="userId">
+      <div class="field"><label>Employee Code</label><input type="text" id="empCode" required></div>
+      <div class="field"><label>Full Name</label><input type="text" id="fullName" required></div>
+      <div class="field"><label>Username</label><input type="text" id="username" required></div>
+      <div class="field"><label>Password</label><input type="password" id="password" placeholder="Leave empty to keep"></div>
+      <div class="field"><label>Role</label>
+        <select id="role"><option value="employee">Employee</option><option value="admin">Admin</option></select>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="cancelUser">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Face Registration Modal -->
+<div class="modal-backdrop hidden" id="faceModal">
+  <div class="modal glass">
+    <h3>Register Face</h3>
+    <p class="text-muted" id="faceUserName"></p>
+    <div class="camera-stage small">
+      <video id="regVideo" autoplay playsinline muted
+             style="width:100%;height:100%;object-fit:cover;background:#000"></video>
+      <div class="face-guide"></div>
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" id="cancelFace">Cancel</button>
+      <button type="button" class="btn btn-primary" id="captureFace">Capture</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>window.CSRF_TOKEN = "{{ csrf_token }}";</script>
+<script src="/static/js/camera.js?v=2"></script>
+<script src="/static/js/users.js?v=2"></script>
+{% endblock %}

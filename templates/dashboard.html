@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — LumaAttend{% endblock %}
+{% block content %}
+<div class="dashboard-layout">
+  <header class="page-header">
+    <div>
+      <h1>Dashboard</h1>
+      <p class="text-muted" id="liveClock"></p>
+    </div>
+  </header>
+  <div class="stats-grid" id="statsGrid">
+    <div class="glass stat-card skeleton"><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div></div>
+    <div class="glass stat-card skeleton"><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div></div>
+    <div class="glass stat-card skeleton"><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div></div>
+    <div class="glass stat-card skeleton"><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div></div>
+  </div>
+  <div class="glass panel">
+    <h3>Attendance Trend (Last 7 Days)</h3>
+    <canvas id="trendChart" height="120"></canvas>
+  </div>
+  <div class="glass panel">
+    <h3>Recent Attendance</h3>
+    <div id="recentList" class="record-list"><p class="text-muted">Loading...</p></div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#080B14">
+<title>LumaAttend — Kiosk</title>
+<link rel="icon" href="/static/assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/css/kiosk.css">
+</head>
+<body>
+<div class="kiosk-root">
+  <video id="kioskVideo" autoplay playsinline muted></video>
+  <div class="kiosk-overlay">
+    <div class="kiosk-header">
+      <div class="kiosk-logo">
+        <img src="/static/assets/logo.svg" alt="">
+        <span>LumaAttend</span>
+      </div>
+      <div class="kiosk-clock" id="kioskClock">--:--:--</div>
+    </div>
+    <div class="kiosk-face-guide" id="faceGuide"></div>
+    <div class="kiosk-status" id="kioskStatus">
+      <div class="kiosk-status-dot" id="statusDot"></div>
+      <div class="kiosk-status-text" id="statusText">Memuat kamera...</div>
+    </div>
+    <div class="kiosk-success" id="kioskSuccess">
+      <div class="kiosk-success-check">&#10003;</div>
+      <div class="kiosk-success-name" id="successName">-</div>
+      <div class="kiosk-success-action" id="successAction">-</div>
+      <div class="kiosk-success-time" id="successTime">-</div>
+    </div>
+    <div class="kiosk-error" id="kioskError"></div>
+  </div>
+</div>
+<script src="/static/js/camera.js"></script>
+<script src="/static/js/kiosk.js"></script>
+</body>
+</html>

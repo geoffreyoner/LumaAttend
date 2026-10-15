@@ -1,0 +1,16 @@
+# LumaAttend — Python dependencies (pip only)
+#
+# CATATAN PENTING:
+# OpenCV dan NumPy TIDAK ada di sini karena di Android/Linux
+# harus di-install lewat package manager sistem:
+#
+#   Android:  pkg install opencv-python python-numpy
+#   Ubuntu:   sudo apt install python3-opencv python3-numpy
+#   Fedora:   sudo dnf install python3-opencv python3-numpy
+#   Windows:  pip install opencv-python numpy
+#   macOS:    brew install opencv numpy
+#
+# Lihat README.md bagian Instalasi untuk detail per platform.
+
+Flask>=3.0.0
+Werkzeug>=3.0.0
